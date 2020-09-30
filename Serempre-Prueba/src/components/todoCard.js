@@ -7,6 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import {deleteTodo} from '../actions'
 import {useDispatch} from 'react-redux'
+import { Input } from '@material-ui/core'
+import { useState } from 'react'
 
 const styles = makeStyles(theme =>({
     root:{
@@ -24,16 +26,17 @@ const styles = makeStyles(theme =>({
 const TodoCard = ({cardNum, notes}) => {
     const classes = styles()
     const dispatch = useDispatch()
+    const [edit, setEdit] = useState(false);
     return (
         <Card className={classes.root}>
             <CardContent>
                 <Typography variant="body2">
-                    {notes}
+                    {edit ? (<Input/>) : (<Input disabled defaultValue={notes} />)}
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button className={classes.edit}>
-                    EDIT
+                <Button className={classes.edit} onClick={()=>setEdit(!edit)}>
+                    {edit ? ('DONE'):('EDIT')}
                 </Button>
                 <Button onClick={()=>dispatch(deleteTodo(cardNum))} className={classes.delete}>
                     DELETE

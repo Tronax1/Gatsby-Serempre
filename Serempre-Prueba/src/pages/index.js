@@ -1,6 +1,6 @@
 import React from "react"
 import Layout from '../components/layout'
-import { TextField } from '@material-ui/core'
+import { TextField, Button } from '@material-ui/core'
 import {useState} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {addTodo} from '../actions'
@@ -34,6 +34,7 @@ const IndexPage = () => {
             value={data}
             onChange={e => setData(e.target.value)}
           />
+          <Button>N</Button>
         </form>
         {todos ? (renderTodos()): ('')}
       </div>
