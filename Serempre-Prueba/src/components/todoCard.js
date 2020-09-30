@@ -8,7 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import {deleteTodo, updateTodo} from '../actions'
 import {useDispatch} from 'react-redux'
 import { Input } from '@material-ui/core'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const styles = makeStyles(theme =>({
     root:{
@@ -29,6 +29,10 @@ const TodoCard = ({cardNum, notes}) => {
     const [edit, setEdit] = useState(false);
     const [editInfo, setEditInfo] = useState(notes);
 
+    useEffect(()=>{
+        setEditInfo(notes)
+    }, [notes])
+    
     const handleUpdate = () => {
         setEdit(!edit)
         const updatedData = {
@@ -37,6 +41,7 @@ const TodoCard = ({cardNum, notes}) => {
         }
         dispatch(updateTodo(updatedData))
     }
+
     return (
         <Card className={classes.root}>
             <CardContent>    
