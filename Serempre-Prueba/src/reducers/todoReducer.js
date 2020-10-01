@@ -1,8 +1,6 @@
 import {ADD_TODO, DELETE_TODO, UPDATE_TODO} from '../actions/types'
 
-const initialState = [
-
-]
+const initialState = []
 export default (state = initialState, action) => {
     switch (action.type) {
         case ADD_TODO:
