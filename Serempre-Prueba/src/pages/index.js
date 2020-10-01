@@ -5,6 +5,24 @@ import {useState, useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {addTodo} from '../actions'
 import TodoCard from '../components/todoCard'
+import { makeStyles } from '@material-ui/core/styles';
+import Ocean from '../images/Ocean.jpg'
+
+const imageStyle = { 
+  position: 'absolute', 
+  top: 0, 
+  bottom: 0, 
+  left: 0,
+  right: 0,
+  width: '100%',
+  height: '100%',
+  zIndex: -3
+}
+const styles = makeStyles(theme=>({
+  Input:{
+    width: '50vw',
+  }
+}))
 
 const IndexPage = () => {
   const todos = useSelector(state => state.todos)
@@ -13,7 +31,7 @@ const IndexPage = () => {
   const [data, setData] = useState({description: '', lat: 0, lng: 0})
   
   
-
+  const classes = styles()
   const handleSubmit = (e) => {
     e.preventDefault()
     //getGeoLocation()
@@ -65,11 +83,12 @@ const IndexPage = () => {
   useEffect(getGeoLocation, [])
 
   return (
-    
     <Layout>
       <div>
+        <img src={Ocean} alt="Nature" style={imageStyle}></img>
         <form onSubmit={e => handleSubmit(e)}>
           <TextField
+            className={classes.Input}
             id="outlined-secondary"
             label="Task"
             variant="outlined"

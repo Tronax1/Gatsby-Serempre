@@ -9,10 +9,11 @@ import {deleteTodo, updateTodo} from '../actions'
 import {useDispatch} from 'react-redux'
 import { Input } from '@material-ui/core'
 import { useState, useEffect } from 'react'
+import Zoom from '@material-ui/core/Zoom';
 
 const styles = makeStyles(theme =>({
     root:{
-        width: '20vw',
+        width: '50vw',
         backgroundColor: 'lightblue',
         marginTop: '30px'
     },
@@ -21,6 +22,12 @@ const styles = makeStyles(theme =>({
     },
     delete:{
         backgroundColor: 'red'
+    },
+    size:{
+        width: '90%'
+    },
+    aligning:{
+        justifyContent: 'right'
     }
 }))
 
@@ -44,23 +51,25 @@ const TodoCard = ({cardNum, notes}) => {
     }
 
     return (
-        <Card className={classes.root}>
-            <CardContent>    
-                {edit ? (<Input value={editInfo} onChange={e => setEditInfo(e.target.value)} />) : (<TextField id="standard-basic" label={notes} disabled/>)}            
-            </CardContent>
-            <CardActions>
-                {edit ? (
-                <Button className={classes.edit} onClick={() => handleUpdate()}>
-                    DONE
-                </Button>):
-                    (<Button className={classes.edit} onClick={() => setEdit(!edit)}>
-                        EDIT
-                    </Button>)}
-                <Button onClick={()=>dispatch(deleteTodo(cardNum))} className={classes.delete}>
-                    DELETE
+        <Zoom in={true}>
+            <Card className={classes.root}>
+                <CardContent className={classes.size}>
+                    {edit ? (<Input className={classes.size} value={editInfo} onChange={e => setEditInfo(e.target.value)} />) : (<TextField className={classes.size} id="standard-basic" label={notes} disabled />)}
+                </CardContent>
+                <CardActions className={classes.aligning}>
+                    {edit ? (
+                        <Button className={classes.edit} onClick={() => handleUpdate()}>
+                            DONE
+                        </Button>) :
+                        (<Button className={classes.edit} onClick={() => setEdit(!edit)}>
+                            EDIT
+                        </Button>)}
+                    <Button onClick={() => dispatch(deleteTodo(cardNum))} className={classes.delete}>
+                        DELETE
                 </Button>
-            </CardActions>
-        </Card>
+                </CardActions>
+            </Card>
+        </Zoom>
     )
 }
 

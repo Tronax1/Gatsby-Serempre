@@ -31,7 +31,7 @@ const Layout = ({children}) =>{
           </Button>
         </Toolbar>
       </AppBar>
-      <div>
+      <div style={{ display: 'flex', justifyContent: 'center' , marginTop: '60px'}}>
         {children}
       </div>
         </>
