@@ -12,7 +12,7 @@ export default (state = initialState, action) => {
         }
         case UPDATE_TODO:{
             const updatedArray = state.slice()
-            updatedArray[action.payload.id] = action.payload.data
+            updatedArray[action.payload.id].description = action.payload.data
             return updatedArray
         }
         default:

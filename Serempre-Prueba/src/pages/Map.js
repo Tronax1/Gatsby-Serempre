@@ -16,13 +16,14 @@ const Map = () => {
     }
     const renderMarkers = () => (
         todosCoordinates.map((item, i)=>(
-            <Marker key={i} lat={item.lat} lng={item.lng}/>
+            <Marker key={i} lat={item.lat} lng={item.lng} description={item.description}/>
         ))
     )
     return (
         <Layout>
             <div style={{height: '88vh', width: '100%'}}>
                 <GoogleMapReact
+                    
                     defaultCenter={coordinates.center}
                     defaultZoom={5}
                 >

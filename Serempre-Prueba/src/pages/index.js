@@ -1,11 +1,11 @@
 import React from "react"
 import Layout from '../components/layout'
-import { TextField, Button } from '@material-ui/core'
-import {useState, useEffect} from 'react'
+import { TextField, Typography} from '@material-ui/core'
 import {useSelector, useDispatch} from 'react-redux'
 import {addTodo} from '../actions'
 import TodoCard from '../components/todoCard'
 import { makeStyles } from '@material-ui/core/styles';
+import useGeoLocation from '../Custom Hooks/useGeoLocation'
 import Ocean from '../images/Ocean.jpg'
 
 const imageStyle = { 
@@ -21,89 +21,50 @@ const imageStyle = {
 const styles = makeStyles(theme=>({
   Input:{
     width: '50vw',
+  },
+  header:{
+    textAlign: 'center',
+    marginBottom: '20px'
   }
 }))
 
 const IndexPage = () => {
   const todos = useSelector(state => state.todos)
-  console.log(todos)
+  const {data, setDescription, setDefault} = useGeoLocation()
   const dispatch = useDispatch()
-  const [data, setData] = useState({description: '', lat: 0, lng: 0})
-  
   
   const classes = styles()
   const handleSubmit = (e) => {
     e.preventDefault()
-    //getGeoLocation()
     dispatch(addTodo(data))
     console.log(data)
-    setData({
-      description: '',
-      lat: 0,
-      lng: 0
-    })
+    setDefault()
   }
   const renderTodos = () => (
     todos.map((item, i) => (
       <TodoCard key={i} cardNum={i} notes={item.description}/>
     ))
   )
-  const getGeoLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(getCoordinates, handleLocationError);
-    } else {
-      alert("Geolocation is not supported by this browser.");
-    }
-  }
-  const getCoordinates = (position) => {
-    setData(prevState => ({
-      ...prevState,
-      lat: position.coords.latitude,
-      lng: position.coords.longitude,
-    }))
-  }
-  const handleLocationError = (error) => {
-      switch (error.code) {
-        case error.PERMISSION_DENIED:
-          alert("User denied the request for Geolocation.")
-          break;
-        case error.POSITION_UNAVAILABLE:
-          alert("Location information is unavailable.")
-          break;
-        case error.TIMEOUT:
-          alert("The request to get user location timed out.")
-          break;
-        case error.UNKNOWN_ERROR:
-          alert("An unknown error occurred.")
-          break;
-        default:
-          alert("An unknown error occurred")
-      }
-  }
-  useEffect(getGeoLocation, [])
 
   return (
     <Layout>
-      <div>
-        <img src={Ocean} alt="Nature" style={imageStyle}></img>
-        <form onSubmit={e => handleSubmit(e)}>
-          <TextField
-            className={classes.Input}
-            id="outlined-secondary"
-            label="Task"
-            variant="outlined"
-            color="secondary"
-            value={data.description}
-            onChange={e => {
-              const val = e.target.value
-              setData((prevState,props)=>({
-              ...prevState,
-              description: val
-            }))}}
-          />
-          <Button>N</Button>
-        </form>
-        {todos ? (renderTodos()): ('')}
+      <div style={{ display: 'flex', justifyContent: 'center', marginTop: '60px' }}>
+        <div>
+          <Typography variant="h3" className={classes.header}>TODOS</Typography>
+          <img src={Ocean} alt="Nature" style={imageStyle}></img>
+          <form onSubmit={e => handleSubmit(e)}>
+            <TextField
+              className={classes.Input}
+              id="outlined-secondary"
+              label="Task"
+              variant="outlined"
+              color="secondary"
+              value={data.description}
+              onChange={e => setDescription(e)}
+            />
+          </form>
+          <div style={{width: '105%', height: '58vh', overflowY: 'auto'}}>{todos ? (renderTodos()): ('')}</div>
+        </div>
       </div>
     </Layout>
   )

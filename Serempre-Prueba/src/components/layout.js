@@ -14,6 +14,9 @@ const useStyles = makeStyles(theme=>({
   appBar:{
     top: 'auto',
     bottom: 0
+  },
+  links:{
+    justifyContent: 'center'
   }
 }))
 
@@ -22,7 +25,7 @@ const Layout = ({children}) =>{
   return (
         <>
       <AppBar position='fixed' className={classes.appBar}>
-        <Toolbar>
+        <Toolbar className={classes.links}>
           <Button color='inherit'>
             <Link style={{ color: 'white' }} to='/'>TODO</Link>
           </Button>
@@ -31,7 +34,7 @@ const Layout = ({children}) =>{
           </Button>
         </Toolbar>
       </AppBar>
-      <div style={{ display: 'flex', justifyContent: 'center' , marginTop: '60px'}}>
+      <div >
         {children}
       </div>
         </>
