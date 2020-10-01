@@ -13,7 +13,8 @@ import { useState, useEffect } from 'react'
 const styles = makeStyles(theme =>({
     root:{
         width: '20vw',
-        backgroundColor: 'lightblue'
+        backgroundColor: 'lightblue',
+        marginTop: '30px'
     },
     edit:{
         backgroundColor: 'lightgreen'
