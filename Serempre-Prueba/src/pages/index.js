@@ -6,7 +6,6 @@ import {addTodo} from '../actions'
 import TodoCard from '../components/todoCard'
 import { makeStyles } from '@material-ui/core/styles';
 import useGeoLocation from '../Custom Hooks/useGeoLocation'
-import Ocean from '../images/Ocean.jpg'
 
 const imageStyle = { 
   position: 'absolute', 
@@ -16,7 +15,10 @@ const imageStyle = {
   right: 0,
   width: '100%',
   height: '100%',
-  zIndex: -3
+  zIndex: -3,
+  backgroundColor: '#08AEEA',
+  backgroundImage: 'linear-gradient(0deg, #08AEEA 0%, #2AF598 100%)'
+
 }
 const styles = makeStyles(theme=>({
   Input:{
@@ -51,7 +53,7 @@ const IndexPage = () => {
       <div style={{ display: 'flex', justifyContent: 'center', marginTop: '60px' }}>
         <div>
           <Typography variant="h3" className={classes.header}>TODOS</Typography>
-          <img src={Ocean} alt="Nature" style={imageStyle}></img>
+          <div style={imageStyle}></div>
           <form onSubmit={e => handleSubmit(e)}>
             <TextField
               className={classes.Input}

@@ -1,6 +1,7 @@
 import React from 'react'
 import AddLocationIcon from '@material-ui/icons/AddLocation';
 import { makeStyles } from '@material-ui/core/styles';
+import Modal from './Modal'
 import {useState} from 'react'
 
 const styles = makeStyles(theme=>({
@@ -20,11 +21,13 @@ const styles = makeStyles(theme=>({
 const Marker = ({description}) => {
     const classes = styles()
     const [showInfo, setShowInfo] = useState(false)
-    console.log(showInfo)
     return(
-        <AddLocationIcon onMouseEnter={()=>setShowInfo(!showInfo)} 
-            onMouseLeave={()=>setShowInfo(!showInfo)}
-        className={classes.marker}/>
+        <>
+            <Modal show={showInfo} description={description}/>
+            <AddLocationIcon onMouseEnter={()=>setShowInfo(!showInfo)} 
+                onMouseLeave={()=>setShowInfo(!showInfo)}
+            className={classes.marker}/>
+        </>
     )
 }
 

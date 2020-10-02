@@ -14,7 +14,7 @@ import Zoom from '@material-ui/core/Zoom';
 const styles = makeStyles(theme =>({
     root:{
         width: '50vw',
-        backgroundColor: 'lightblue',
+        background: 'linear-gradient(to bottom, #FFFAF0 0%, #F0EBE1 100%)',
         marginTop: '30px'
     },
     edit:{
